@@ -16,3 +16,4 @@ class ProcBase:
         print(ProcBase.underline_str)
         print("Information in ", self.file_path)
         print(ProcBase.underline_str)
+        print() # new line
