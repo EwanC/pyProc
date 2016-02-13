@@ -16,3 +16,5 @@
 Hobby project to write a python3 script for scraping the UNIX /proc pseudo file-system.
 
 For more details on /proc see the man page.
+
+[![Build Status](https://travis-ci.org/EwanC/pyProc.svg)](https://travis-ci.org/EwanC/pyProc) Master
