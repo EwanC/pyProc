@@ -43,27 +43,31 @@ class ProcStat(ProcBase):
         super(ProcStat, self).__init__('/proc/stat')
         self.read()
 
-
     def read(self):
         for line in self.content.split('\n'):
+            tokens = line.split()
+
+            if not tokens:
+               continue
+
             if line.startswith('cpu'):
                 self.cpus.append(CpuStats(line))
-            elif line.startswith('ctxt'):
-                self.stats.append(('context switches:',line.split()[-1]))
-            elif line.startswith('btime'):
-                self.stats.append(('boot time:',line.split()[-1]))
-            elif line.startswith('processes'):
-                self.stats.append(('processes:',line.split()[-1]))
-            elif line.startswith('procs_running'):
-                self.stats.append(('running processes:',line.split()[-1]))
-            elif line.startswith('procs_blocked'):
-                self.stats.append(('blocked processes:',line.split()[-1]))
+            elif tokens[0] == 'ctxt':
+                self.stats.append(('Number of context switches:', tokens[-1]))
+            elif tokens[0] == 'btime':
+                self.stats.append(('Boot time in seconds since epoch:', tokens[-1]))
+            elif tokens[0] == 'processes':
+                self.stats.append(('Number of processes forked since boot:', tokens[-1]))
+            elif tokens[0] == 'procs_running':
+                self.stats.append(('Number of processes in a runnable state:', tokens[-1]))
+            elif tokens[0] == 'procs_blocked':
+                self.stats.append(('Number of processes blocked waiting on I/O:', tokens[-1]))
 
     def dump(self):
-        for cpu in self.cpus:
-            cpu.dump()
+        super(ProcStat, self).dump()
 
         for (msg,num) in self.stats:
-            print(msg, num)
+           print(msg, num)
 
-    
+        for cpu in self.cpus:
+            cpu.dump()
