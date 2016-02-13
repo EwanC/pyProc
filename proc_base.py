@@ -2,19 +2,37 @@
 
 
 class ProcBase:
+    '''
+    Virtual base class for all /proc/ subdirectory classes.
+
+    Defines virtual methods for opening a file
+    and reading data.
+
+    Child classes will represent different folders/files in the
+    /proc/ file system.
+    '''
 
     underline_str = '=' * 80
 
     def __init__(self, file_path):
+        '''
+        Opens file and reads its contents.
+
+        Keyword arguments:
+        file_path -- path to file base class represents
+        '''
+
         self.file_path = file_path
         self.handle = open(self.file_path, 'r')
         self.content = self.handle.read()
 
     def __exit__(self):
+        '''Close file handle when instance is destroyed'''
         self.handle.close()
 
     def dump(self):
+        '''Print header identifying file parsed'''
         print(ProcBase.underline_str)
         print('Information in ', self.file_path)
         print(ProcBase.underline_str)
-        print()  # new line
+        print()  # New line

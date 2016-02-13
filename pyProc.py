@@ -4,6 +4,10 @@ from proc_stat import ProcStat
 
 
 def print_stats():
+    '''
+    Parses details from the /proc/stat file.
+    Gathered information is then printed to stdout.
+    '''
     stat = ProcStat()
     stat.dump()
 
