@@ -4,11 +4,10 @@ from proc_base import ProcBase
 
 class CpuStats:
 
-    table_format_str = "| {0:>6} | {1:>9} | {2:>5} | {3:>10} | {4:>9} | {5:>11} | {6:>5} | {7:7.2f} |"
+    table_format_str = "| {0:>6} | {1:>9} | {2:>5} | {3:>10} | {4:>9} | {5:>11} | {6:>5} | {percent:7.2f} |"
     
     def __init__(self, line):
 
-        self.__entries = []
         split = line.split()
 
         if split[0][-1].isdigit():
@@ -18,32 +17,13 @@ class CpuStats:
             self.label = "All"
             self.index = -1
 
-        self.user = int(split[1])
-        self.nice = int(split[2])
-        self.system = int(split[3])
-        self.idle = int(split[4])
-        self.io = int(split[5])
-        self.irq = int(split[6])
+        self._entries = [ int(entry) for entry in split[1:]]
 
-    def set_percentage(self, grand_total):
-        total = self.user + self.nice + self.system + self.idle + self.io + self.irq
-        self.percentage =  (total / grand_total) * 100  
-    
     def get_total(self):
-        total = self.user + self.nice + self.system + self.idle + self.io + self.irq
-        return total
+        return sum(self._entries)
 
-    def dump_table_entry(self):
-        table_entry_str = CpuStats.table_format_str.format(
-                self.label,
-                self.user,
-                self.nice,
-                self.system,
-                self.idle,
-                self.io,
-                self.irq,
-                self.percentage)
-
+    def dump_table_entry(self, _percent):
+        table_entry_str = CpuStats.table_format_str.format(self.label, *self._entries, percent=_percent)
         print(table_entry_str)
 
 class ProcStat(ProcBase):
@@ -79,15 +59,11 @@ class ProcStat(ProcBase):
         print(table_heading_str)
         print('-' * len(table_heading_str))
 
-        total_usage = 0
-        for cpu in self.cpus:
-            if cpu.index == -1:
-                total_usage = cpu.get_total()
-                break;
+        total_usage = max([cpu.get_total() for cpu in self.cpus])
         
         for cpu in self.cpus:
-            cpu.set_percentage(total_usage)
-            cpu.dump_table_entry()
+            percent = (cpu.get_total() / total_usage) * 100
+            cpu.dump_table_entry(percent)
 
     def dump(self):
         super(ProcStat, self).dump()
