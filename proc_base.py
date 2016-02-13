@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
+
 class ProcBase:
-  
+
     underline_str = "=" * 80
 
     def __init__(self, file_path):
@@ -16,4 +17,4 @@ class ProcBase:
         print(ProcBase.underline_str)
         print("Information in ", self.file_path)
         print(ProcBase.underline_str)
-        print() # new line
+        print()  # new line

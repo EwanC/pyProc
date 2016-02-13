@@ -2,6 +2,7 @@
 
 from proc_stat import ProcStat
 
+
 def print_stats():
     stat = ProcStat()
     stat.dump()
