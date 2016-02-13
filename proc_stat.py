@@ -4,7 +4,7 @@ from proc_base import ProcBase
 
 class CpuStats:
 
-    table_format_str = "| {0:>6} | {1:>9} | {2:>5} | {3:>10} | {4:>9} | {5:>11} | {6:>5} |"
+    table_format_str = "| {0:>6} | {1:>9} | {2:>5} | {3:>10} | {4:>9} | {5:>11} | {6:>5} | {7:7.2f} |"
     
     def __init__(self, line):
 
@@ -25,6 +25,14 @@ class CpuStats:
         self.io = int(split[5])
         self.irq = int(split[6])
 
+    def set_percentage(self, grand_total):
+        total = self.user + self.nice + self.system + self.idle + self.io + self.irq
+        self.percentage =  (total / grand_total) * 100  
+    
+    def get_total(self):
+        total = self.user + self.nice + self.system + self.idle + self.io + self.irq
+        return total
+
     def dump_table_entry(self):
         table_entry_str = CpuStats.table_format_str.format(
                 self.label,
@@ -33,7 +41,8 @@ class CpuStats:
                 self.system,
                 self.idle,
                 self.io,
-                self.irq)
+                self.irq,
+                self.percentage)
 
         print(table_entry_str)
 
@@ -66,11 +75,18 @@ class ProcStat(ProcBase):
                 self.stats.append(('Number of processes blocked waiting on I/O:', tokens[-1]))
 
     def _dump_cpu_stat_table(self):
-        table_heading_str = "| CPU ID | User Land | Niced | System Land |   Idle   | I/O blocked |  IRQ  |"
+        table_heading_str = "| CPU ID | User Land | Niced | System Land |   Idle   | I/O blocked |  IRQ  |    %    |"
         print(table_heading_str)
         print('-' * len(table_heading_str))
+
+        total_usage = 0
+        for cpu in self.cpus:
+            if cpu.index == -1:
+                total_usage = cpu.get_total()
+                break;
         
         for cpu in self.cpus:
+            cpu.set_percentage(total_usage)
             cpu.dump_table_entry()
 
     def dump(self):
