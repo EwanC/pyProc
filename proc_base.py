@@ -3,7 +3,7 @@
 
 class ProcBase:
 
-    underline_str = "=" * 80
+    underline_str = '=' * 80
 
     def __init__(self, file_path):
         self.file_path = file_path
@@ -15,6 +15,6 @@ class ProcBase:
 
     def dump(self):
         print(ProcBase.underline_str)
-        print("Information in ", self.file_path)
+        print('Information in ', self.file_path)
         print(ProcBase.underline_str)
         print()  # new line

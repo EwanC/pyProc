@@ -5,18 +5,18 @@ from proc_base import ProcBase
 
 class CpuStats:
 
-    table_format_str = "| {0:>6} | {1:>9} | {2:>5} | {3:>11} | {4:>8} |" \
-                       " {5:>11} | {6:>5} | {percent:7.2f} |"
+    table_format_str = '| {0:>6} | {1:>9} | {2:>5} | {3:>11} | {4:>8} |' \
+                       ' {5:>11} | {6:>5} | {percent:7.2f} |'
 
     def __init__(self, line):
 
         split = line.split()
 
         if split[0][-1].isdigit():
-            self.label = "#" + split[0][-1]
+            self.label = '#' + split[0][-1]
             self.index = int(split[0][-1])
         else:
-            self.label = "All"
+            self.label = 'All'
             self.index = -1
 
         self._entries = [int(entry) for entry in split[1:]]
@@ -62,8 +62,8 @@ class ProcStat(ProcBase):
                     ('Number of processes blocked on I/O:', tokens[-1]))
 
     def _dump_cpu_stat_table(self):
-        table_heading_str = "| CPU ID | User Land | Niced | System Land |" \
-                            "   Idle   |"" I/O blocked |  IRQ  |    %    |"
+        table_heading_str = '| CPU ID | User Land | Niced | System Land |' \
+                            '   Idle   | I/O blocked |  IRQ  |    %    |'
         print(table_heading_str)
         print('-' * len(table_heading_str))
 

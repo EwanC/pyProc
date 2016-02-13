@@ -7,5 +7,5 @@ def print_stats():
     stat = ProcStat()
     stat.dump()
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     print_stats()
