@@ -9,8 +9,10 @@
 |_|    |___/                     
 </pre>
 
-### Author: Ewan Crawford
-### Email: ewan.cr@gmail.com
+###  Author: Ewan Crawford
+#### Email: ewan.cr@gmail.com
+#### License: MIT
 
 Hobby project to write a python3 script for scraping the UNIX /proc pseudo file-system.
+
 For more details on /proc see the man page.
