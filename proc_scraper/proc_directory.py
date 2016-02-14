@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
-from proc_stat import ProcStat
-from proc_swaps import ProcSwaps
-from proc_uptime import ProcUptime
-from proc_version import ProcVersion
+from .proc_stat import ProcStat
+from .proc_swaps import ProcSwaps
+from .proc_uptime import ProcUptime
+from .proc_version import ProcVersion
 
 
 class ProcDirectory:

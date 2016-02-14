@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from proc_base import ProcBase
+from .proc_base import ProcBase
 
 
 class ProcVersion(ProcBase):

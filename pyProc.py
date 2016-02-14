@@ -3,7 +3,7 @@
 import os
 import sys
 
-from proc_directory import ProcDirectory
+from proc_scraper.proc_directory import ProcDirectory
 
 
 if __name__ == '__main__':
