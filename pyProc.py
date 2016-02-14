@@ -9,40 +9,33 @@ from proc_uptime import ProcUptime
 from proc_version import ProcVersion
 
 
-def print_stats():
+class PrintManager:
     '''
-    Parses details from the /proc/stat file.
-    Gathered information is then printed to stdout.
-    '''
-    stat = ProcStat()
-    stat.dump()
+    Class manages the list of supported /proc
+    sub-files we have classes for.
 
+    As well as printing the information contained in
+    them to stdout.
+    '''
 
-def print_uptime():
-    '''
-    Parses details from the /proc/uptime file.
-    Gathered information is then printed to stdout.
-    '''
-    uptime = ProcUptime()
-    uptime.dump()
+    def __init__(self):
+        '''
+        Creates an instance of all the classes derived
+        from ProcBase. Representing abstractions of
+        the supported sub-files.
+        '''
+        self.file_wrappers = [ProcStat(),
+                              ProcSwaps(),
+                              ProcUptime(),
+                              ProcVersion()]
 
-
-def print_version():
-    '''
-    Parses details from the /proc/version file.
-    Gathered information is then printed to stdout.
-    '''
-    version = ProcVersion()
-    version.dump()
-
-
-def print_swaps():
-    '''
-    Parses details from the /proc/swaps file.
-    Gathered information is then printed to stdout.
-    '''
-    swaps = ProcSwaps()
-    swaps.dump()
+    def dump_all(self):
+        '''
+        Iterates over all files and prints their details to
+        stdout using overridden procBase dump() function.
+        '''
+        for _file in self.file_wrappers:
+            _file.dump()  # Implemented in base class
 
 
 if __name__ == '__main__':
@@ -51,7 +44,6 @@ if __name__ == '__main__':
         print('pyProc only supports UNIX systems, exiting')
         sys.exit()
 
-    print_stats()
-    print_uptime()
-    print_version()
-    print_swaps()
+    # Print all details
+    printer = PrintManager()
+    printer.dump_all()
