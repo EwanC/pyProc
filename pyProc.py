@@ -3,6 +3,7 @@
 from proc_stat import ProcStat
 from proc_uptime import ProcUptime
 from proc_version import ProcVersion
+from proc_swaps import ProcSwaps
 
 
 def print_stats():
@@ -32,7 +33,17 @@ def print_version():
     version.dump()
 
 
+def print_swaps():
+    '''
+    Parses details from the /proc/swaps file.
+    Gathered information is then printed to stdout.
+    '''
+    swaps = ProcSwaps()
+    swaps.dump()
+
+
 if __name__ == '__main__':
     print_stats()
     print_uptime()
     print_version()
+    print_swaps()
