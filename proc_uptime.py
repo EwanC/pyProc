@@ -16,16 +16,13 @@ class ProcUptime(ProcBase):
 
     def read(self):
         '''Parses contents of /proc/uptime'''
-        # Iterate over each line of the file
-            
         tokens = self.content.split()
         self.uptime = float(tokens[0])
         self.idletime = float(tokens[1])
-        
+
     def dump(self):
         '''Print information gathered to stdout.'''
         super(ProcUptime, self).dump()  # Print file header
 
         print('System uptime: {0} seconds, idle time: {1} seconds'.format(
               self.uptime, self.idletime))
-

@@ -2,6 +2,7 @@
 
 from proc_stat import ProcStat
 from proc_uptime import ProcUptime
+from proc_version import ProcVersion
 
 
 def print_stats():
@@ -21,6 +22,17 @@ def print_uptime():
     uptime = ProcUptime()
     uptime.dump()
 
+
+def print_version():
+    '''
+    Parses details from the /proc/version file.
+    Gathered information is then printed to stdout.
+    '''
+    version = ProcVersion()
+    version.dump()
+
+
 if __name__ == '__main__':
     print_stats()
     print_uptime()
+    print_version()
