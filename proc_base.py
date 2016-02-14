@@ -32,7 +32,7 @@ class ProcBase:
 
     def dump(self):
         '''Print header identifying file parsed'''
+        print()  # New line
         print(ProcBase.underline_str)
         print('Information in ', self.file_path)
         print(ProcBase.underline_str)
-        print()  # New line
