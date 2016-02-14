@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 
+import os
+import sys
+
 from proc_stat import ProcStat
+from proc_swaps import ProcSwaps
 from proc_uptime import ProcUptime
 from proc_version import ProcVersion
-from proc_swaps import ProcSwaps
 
 
 def print_stats():
@@ -43,6 +46,11 @@ def print_swaps():
 
 
 if __name__ == '__main__':
+
+    if os.name != 'posix':
+        print('pyProc only supports UNIX systems, exiting')
+        sys.exit()
+
     print_stats()
     print_uptime()
     print_version()
