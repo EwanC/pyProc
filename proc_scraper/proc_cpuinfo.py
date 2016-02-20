@@ -4,82 +4,102 @@ from .proc_base import ProcBase
 
 
 class CpuDetails:
+    '''
+    Class representing the information relating to
+    a single cpu entry from /proc/cpu_info
+    '''
 
     def __init__(self, cpu_lines):
+        '''
+        Parse several lines read from /proc/cpu_info
+        for a single cpu
+        '''
 
-       self.details = []
-       for line in cpu_lines.split('\n'):
-          tokens = line.split()
+        self.details = []
+        for line in cpu_lines.split('\n'):
+            tokens = line.split()
 
-          if not tokens:
-              continue
+            if not tokens:
+                continue
 
-          if tokens[0] == 'processor':
-              self.details.append(('cpu index',tokens[-1]))
-          elif tokens[0] == 'vendor_id':
-              self.details.append(('vendor_id',tokens[-1]))
-          elif tokens[0] == 'cpu' and tokens[1] == 'family':
-              self.details.append(('family',tokens[-1]))
-          elif tokens[0] == 'model' and tokens[1] == ':':
-              self.details.append(('model#',tokens[-1]))
-          elif tokens[0] == 'model' and tokens[1] == 'name':
-              self.details.append(('model name',tokens[2:]))
-          elif tokens[0] == 'stepping':
-              self.details.append(('stepping',tokens[-1]))
-          elif tokens[0] == 'microcode':
-              self.details.append(('microcode',tokens[-1]))
-          elif tokens[0] == 'cpu' and tokens[1] == 'MHz':
-              self.details.append(('hertz',tokens[-1]))
-          elif tokens[0] == 'cache':
-              self.details.append(('cache_size',tokens[-2]))
-          elif tokens[0] == 'physical':
-              self.details.append(('physical_id',tokens[-1]))
-          elif tokens[0] == 'siblings':
-              self.details.append(('siblings',tokens[-1]))
-          elif tokens[0] == 'core':
-              self.details.append(('core_id',tokens[-1]))
-          elif tokens[0] == 'cpu' and tokens[1] == 'cores':
-              self.details.append(('#cores',tokens[-1]))
-          elif tokens[0] == 'fpu' and tokens[1] == ':':
-              self.details.append(('fpu',tokens[-1] == 'yes'))
-          elif tokens[0] == 'cpuid':
-              self.details.append(('cpu_id',tokens[-1]))
-          elif tokens[0] == 'flags':
-              self.details.append(('flags',tokens[2:]))
-          elif tokens[0] == 'bogomips':
-              self.details.append(('bogomips',tokens[-1]))
-          elif tokens[0] == 'cache_alignment':
-              self.details.append(('cache_alignment',tokens[-1]))
-          elif tokens[0] == 'address':
-              self.address_sizes = tokens[3:]
-              self.details.append(('addr_sizes',tokens[3:]))
-          elif tokens[0] == 'power':
-              self.details.append(('power',tokens[1:]))
+            if tokens[0] == 'processor':
+                self.details.append(('cpu index', tokens[-1]))
+            elif tokens[0] == 'vendor_id':
+                self.details.append(('vendor_id', tokens[-1]))
+            elif tokens[0] == 'cpu' and tokens[1] == 'family':
+                self.details.append(('family', tokens[-1]))
+            elif tokens[0] == 'model' and tokens[1] == ':':
+                self.details.append(('model#', tokens[-1]))
+            elif tokens[0] == 'model' and tokens[1] == 'name':
+                self.details.append(('model name', tokens[2:]))
+            elif tokens[0] == 'stepping':
+                self.details.append(('stepping', tokens[-1]))
+            elif tokens[0] == 'microcode':
+                self.details.append(('microcode', tokens[-1]))
+            elif tokens[0] == 'cpu' and tokens[1] == 'MHz':
+                self.details.append(('hertz', tokens[-1]))
+            elif tokens[0] == 'cache':
+                self.details.append(('cache_size', tokens[-2]))
+            elif tokens[0] == 'physical':
+                self.details.append(('physical_id', tokens[-1]))
+            elif tokens[0] == 'siblings':
+                self.details.append(('siblings', tokens[-1]))
+            elif tokens[0] == 'core':
+                self.details.append(('core_id', tokens[-1]))
+            elif tokens[0] == 'cpu' and tokens[1] == 'cores':
+                self.details.append(('#cores', tokens[-1]))
+            elif tokens[0] == 'fpu' and tokens[1] == ':':
+                self.details.append(('fpu', tokens[-1] == 'yes'))
+            elif tokens[0] == 'cpuid':
+                self.details.append(('cpu_id', tokens[-1]))
+            elif tokens[0] == 'flags':
+                self.details.append(('flags', tokens[2:]))
+            elif tokens[0] == 'bogomips':
+                self.details.append(('bogomips', tokens[-1]))
+            elif tokens[0] == 'cache_alignment':
+                self.details.append(('cache_alignment', tokens[-1]))
+            elif tokens[0] == 'address':
+                self.address_sizes = tokens[3:]
+                self.details.append(('addr_sizes', tokens[3:]))
+            elif tokens[0] == 'power':
+                self.details.append(('power', tokens[1:]))
 
-    def find(self, attribute):
-        for deet,ail in self.details: 
-            if attribute == deet:
-                return ail
+    def find(self, search_key):
+        '''
+        Lookup attribute, and if found then
+        return the matching value.
+        Otherwise return null'''
+        for attribute, value in self.details:
+            if search_key == attribute:
+                return value
 
         return None
-        
-          
+
     def dump(self):
-        for deet,ail in self.details: 
-            print(deet,":",ail) 
+        '''Print all details to stdout.'''
+        for attribute, value in self.details:
+            if isinstance(value, list):
+                print(attribute, ": ", " ".join(value))
+            else:
+                print(attribute, ": ", value)
         print('\n\n')
 
     def __eq__(self, other):
+        '''== operator overload'''
         if isinstance(other, self.__class__):
             are_same = self.find('vendor_id') == other.find('vendor_id')
-            are_same = are_same and (self.find('model#') == other.find('model#'))
-            are_same = are_same and (self.find('family') == other.find('family'))
+            are_same = are_same and (
+                self.find('model#') == other.find('model#'))
+            are_same = are_same and (
+                self.find('family') == other.find('family'))
             return are_same
         else:
             return False
 
     def __ne__(self, other):
+        '''!= operator overload'''
         return not self.__eq__(other)
+
 
 class ProcCpuInfo(ProcBase):
     '''Object represents the /proc/cpuinfo file.'''
@@ -102,15 +122,13 @@ class ProcCpuInfo(ProcBase):
                 continue
             self.cpus.append(CpuDetails(cpu_lines))
 
-
     def dump_coalesced(self, first_cpu):
-        
+        '''Print a selected subset of cpu info to stdout'''
         print(" ".join(first_cpu.find('model name')[1:]) + ":")
         print("\t" + first_cpu.find('siblings') + " CPU(s)")
         print("\t" + first_cpu.find('hertz') + " MHz")
         print("\t" + first_cpu.find('cache_size') + " KB Cache")
         print("\t" + first_cpu.find('bogomips') + " bogoMips")
-
 
     def dump(self):
         '''Print information gathered to stdout.'''
