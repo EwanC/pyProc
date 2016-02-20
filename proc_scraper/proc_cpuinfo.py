@@ -56,10 +56,30 @@ class CpuDetails:
           elif tokens[0] == 'power':
               self.details.append(('power',tokens[1:]))
 
+    def find(self, attribute):
+        for deet,ail in self.details: 
+            if attribute == deet:
+                return ail
+
+        return None
+        
+          
     def dump(self):
         for deet,ail in self.details: 
             print(deet,":",ail) 
         print('\n\n')
+
+    def __eq__(self, other):
+        if isinstance(other, self.__class__):
+            are_same = self.find('vendor_id') == other.find('vendor_id')
+            are_same = are_same and (self.find('model#') == other.find('model#'))
+            are_same = are_same and (self.find('family') == other.find('family'))
+            return are_same
+        else:
+            return False
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
 
 class ProcCpuInfo(ProcBase):
     '''Object represents the /proc/cpuinfo file.'''
@@ -82,10 +102,24 @@ class ProcCpuInfo(ProcBase):
                 continue
             self.cpus.append(CpuDetails(cpu_lines))
 
+
+    def dump_coalesced(self, first_cpu):
+        
+        print(" ".join(first_cpu.find('model name')[1:]) + ":")
+        print("\t" + first_cpu.find('siblings') + " CPU(s)")
+        print("\t" + first_cpu.find('hertz') + " MHz")
+        print("\t" + first_cpu.find('cache_size') + " KB Cache")
+        print("\t" + first_cpu.find('bogomips') + " bogoMips")
+
+
     def dump(self):
         '''Print information gathered to stdout.'''
         super(ProcCpuInfo, self).dump()  # Print file header
 
-        for cpu in self.cpus:
-            cpu.dump()
+        are_identical = all(cpu == self.cpus[0] for cpu in self.cpus[1:])
 
+        if are_identical:
+            self.dump_coalesced(self.cpus[0])
+        else:
+            for cpu in self.cpus:
+                cpu.dump()
