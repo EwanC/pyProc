@@ -5,6 +5,7 @@ from .proc_swaps import ProcSwaps
 from .proc_uptime import ProcUptime
 from .proc_version import ProcVersion
 from .proc_cpuinfo import ProcCpuInfo
+from .proc_buddyinfo import ProcBuddyInfo
 
 
 class ProcDirectory:
@@ -26,6 +27,7 @@ class ProcDirectory:
                               ProcSwaps(),
                               ProcUptime(),
                               ProcVersion(),
+                              ProcBuddyInfo(),
                               ProcCpuInfo()]
 
     def dump_all(self):
