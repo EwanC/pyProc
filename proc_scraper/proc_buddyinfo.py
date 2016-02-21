@@ -42,7 +42,13 @@ class ProcBuddyInfo(ProcBase):
         '''Print information gathered to stdout.'''
         super(ProcBuddyInfo, self).dump()  # Print file header
 
-        print('//TODO buddy info description here\n')
+
+        print('Buddy info shows the free memory fragments available for the different zones of a numa node')
+        print('This information is useful for diagnosing memory fragmentation issues from allocation requests\n')
+        print('DMA zone     - Lower 16MB, used by legacy devices that can\'t address further')
+        print('DMA32 zone   - Less than 4GB, some x86_64 devices can address beyond this')
+        print('Normal zone  - Typically 16MB to 896MB for x86, anything that doesn\'t require kernel tricks to access')
+        print('Highmem zone - x86 only, >896MB\n\n') 
        
         for node, zone, chunks in self.nodes:
             heading = 'Node {0}, Zone {1}'.format(node, zone)
