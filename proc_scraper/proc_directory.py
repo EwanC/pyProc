@@ -7,6 +7,7 @@ from .proc_version import ProcVersion
 from .proc_cpuinfo import ProcCpuInfo
 from .proc_buddyinfo import ProcBuddyInfo
 from .proc_crypto import ProcCrypto
+from .proc_filesystems import ProcFileSystems
 
 
 class ProcDirectory:
@@ -30,6 +31,7 @@ class ProcDirectory:
                               ProcVersion(),
                               ProcBuddyInfo(),
                               ProcCpuInfo(),
+                              ProcFileSystems(),
                               ProcCrypto()]
 
     def dump_all(self):
