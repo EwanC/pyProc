@@ -8,6 +8,7 @@ from .proc_cpuinfo import ProcCpuInfo
 from .proc_buddyinfo import ProcBuddyInfo
 from .proc_crypto import ProcCrypto
 from .proc_filesystems import ProcFileSystems
+from .proc_interrupts import ProcInterrupts
 
 
 class ProcDirectory:
@@ -32,7 +33,8 @@ class ProcDirectory:
                               ProcBuddyInfo(),
                               ProcCpuInfo(),
                               ProcFileSystems(),
-                              ProcCrypto()]
+                              ProcCrypto(),
+                              ProcInterrupts()]
 
     def dump_all(self):
         '''
