@@ -3,8 +3,13 @@
 from .proc_base import ProcBase
 
 
+from math import ceil
+
+
 class ProcMemInfo(ProcBase):
     '''Object represents the /proc/meminfo file.'''
+
+    format_str = '{0:20} {1:10} {2}'
 
     def __init__(self):
         '''
@@ -68,7 +73,7 @@ class ProcMemInfo(ProcBase):
             tokens = line.split()
             search_key = tokens[0]
             if search_key[-1] == ':':
-               search_key = search_key[:-1]
+                search_key = search_key[:-1]
 
             for attribute in self.stats:
                 if attribute == search_key:
@@ -80,18 +85,33 @@ class ProcMemInfo(ProcBase):
                             size *= 1024
                         elif tokens[2] == 'mB':
                             size *= (1024 * 1024)
-                    
-                        self.stats[attribute] = size
 
-             
+                        self.stats[attribute] = size
 
     def dump(self):
         '''Print information gathered to stdout.'''
 
         super(ProcMemInfo, self).dump()  # Print file header
 
+        # TODO - it would be nice to sort this output
         for attribute in self.stats:
             value = self.stats[attribute]
-            if value != 0 and value != None:
-                print(attribute, ": ", value, "bytes")
+            if value == 0 or value is None:
+                continue
+
+            suffix = "bytes"
+            if value >= 1024:
+                value = ceil(value / 1024)
+                if value >= 1024:
+                    value = ceil(value / 1024)
+                    if value >= 1024:
+                        value = ceil(value / 1024)
+                        suffix = "GB"
+                    else:
+                        suffix = "MB"
+                else:
+                    suffix = "KB"
+
+            print(self.format_str.format(attribute, value, suffix))
+
         print('\n\n')
