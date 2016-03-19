@@ -9,6 +9,7 @@ from .proc_buddyinfo import ProcBuddyInfo
 from .proc_crypto import ProcCrypto
 from .proc_filesystems import ProcFileSystems
 from .proc_interrupts import ProcInterrupts
+from .proc_meminfo import ProcMemInfo
 
 
 class ProcDirectory:
@@ -32,6 +33,7 @@ class ProcDirectory:
                               ProcVersion(),
                               ProcBuddyInfo(),
                               ProcCpuInfo(),
+                              ProcMemInfo(),
                               ProcFileSystems(),
                               ProcCrypto(),
                               ProcInterrupts()]
