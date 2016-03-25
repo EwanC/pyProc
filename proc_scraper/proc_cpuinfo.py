@@ -88,9 +88,9 @@ class CpuDetails:
         '''Print all details to stdout.'''
         for attribute, value in self.details:
             if isinstance(value, list):
-                print(attribute, ": ", " ".join(value))
+                print(attribute, ': ', ' '.join(value))
             else:
-                print(attribute, ": ", value)
+                print(attribute, ': ', value)
         print('\n\n')
 
     def __eq__(self, other):
@@ -133,11 +133,11 @@ class ProcCpuInfo(ProcBase):
 
     def dump_coalesced(self, first_cpu):
         '''Print a selected subset of cpu info to stdout'''
-        print(" ".join(first_cpu.details['model name'][1:]) + ":")
-        print("\t" + first_cpu.details['siblings'] + " CPU(s)")
-        print("\t" + first_cpu.details['hertz'] + " MHz")
-        print("\t" + first_cpu.details['cache_size'] + " KB Cache")
-        print("\t" + first_cpu.details['bogomips'] + " bogoMips")
+        print(' '.join(first_cpu.details['model name'][1:]) + ':')
+        print('\t' + first_cpu.details['siblings'] + ' CPU(s)')
+        print('\t' + first_cpu.details['hertz'] + ' MHz')
+        print('\t' + first_cpu.details['cache_size'] + ' KB Cache')
+        print('\t' + first_cpu.details['bogomips'] + ' bogoMips')
 
     def dump(self):
         '''Print information gathered to stdout.'''
