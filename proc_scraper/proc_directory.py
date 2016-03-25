@@ -28,7 +28,7 @@ class ProcDirectory:
         from ProcBase. Representing abstractions of
         the supported sub-files.
         '''
-        self.file_wrappers = [ProcStat(),
+        self.base_wrappers = [ProcStat(),
                               ProcSwaps(),
                               ProcUptime(),
                               ProcVersion(),
@@ -40,10 +40,26 @@ class ProcDirectory:
                               ProcInterrupts(),
                               ProcPartitions()]
 
-    def dump_all(self):
+    def dump_base(self):
         '''
         Iterates over all files and prints their details to
         stdout using overridden procBase dump() function.
         '''
-        for _file in self.file_wrappers:
+        for _file in self.base_wrappers:
             _file.dump()  # Implemented in base class
+
+    def dump_proc(self, pid):
+        # TODO
+        print('proc', pid)
+
+    def dump_net(self):
+        # TODO
+        print('net')
+
+    def dump_sys(self):
+        # TODO
+        print('sys')
+
+    def dump_devices(self):
+        # TODO
+        print('devices')
