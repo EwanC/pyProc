@@ -11,7 +11,7 @@ class ProcUptime(ProcBase):
         Read file by calling base class constructor
         then parse the contents.
         '''
-        super(ProcUptime, self).__init__('/proc/uptime')
+        super().__init__('/proc/uptime')
         self.read()
 
     def read(self):
@@ -22,7 +22,7 @@ class ProcUptime(ProcBase):
 
     def dump(self):
         '''Print information gathered to stdout.'''
-        super(ProcUptime, self).dump()  # Print file header
+        super().dump()  # Print file header
 
         print('System uptime: {0} seconds, idle time: {1} seconds'.format(
               self.uptime, self.idletime))

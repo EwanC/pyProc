@@ -11,9 +11,9 @@ class ProcVersion(ProcBase):
         Read file by calling base class constructor.
         No parsing of the file is necessary.
         '''
-        super(ProcVersion, self).__init__('/proc/version')
+        super().__init__('/proc/version')
 
     def dump(self):
         '''Print information gathered to stdout.'''
-        super(ProcVersion, self).dump()  # Print file header
+        super().dump()  # Print file header
         print(self.content)

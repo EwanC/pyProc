@@ -60,7 +60,7 @@ class ProcStat(ProcBase):
         '''
         self.cpus = []
         self.stats = []
-        super(ProcStat, self).__init__('/proc/stat')
+        super().__init__('/proc/stat')
         self.read()
 
     def read(self):
@@ -105,7 +105,7 @@ class ProcStat(ProcBase):
 
     def dump(self):
         '''Print information gathered to stdout.'''
-        super(ProcStat, self).dump()  # Print file header
+        super().dump()  # Print file header
 
         for (msg, num) in self.stats:
             print(msg, num)

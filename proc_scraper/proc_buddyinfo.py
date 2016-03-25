@@ -14,7 +14,7 @@ class ProcBuddyInfo(ProcBase):
         then parse the contents.
         '''
         self.nodes = []
-        super(ProcBuddyInfo, self).__init__('/proc/buddyinfo')
+        super().__init__('/proc/buddyinfo')
         self.read()
 
     def read(self):
@@ -47,7 +47,7 @@ class ProcBuddyInfo(ProcBase):
 
     def dump(self):
         '''Print information gathered to stdout.'''
-        super(ProcBuddyInfo, self).dump()  # Print file header
+        super().dump()  # Print file header
 
         print('Buddy info shows the free memory fragments'
               ' available for the different zones of a numa node.')

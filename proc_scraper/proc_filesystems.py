@@ -12,7 +12,7 @@ class ProcFileSystems(ProcBase):
         then parse the contents.
         '''
         self.file_systems = []
-        super(ProcFileSystems, self).__init__('/proc/filesystems')
+        super().__init__('/proc/filesystems')
         self.read()
 
     def read(self):
@@ -29,7 +29,7 @@ class ProcFileSystems(ProcBase):
 
     def dump(self):
         '''Print information gathered to stdout.'''
-        super(ProcFileSystems, self).dump()  # Print file header
+        super().dump()  # Print file header
 
         print('File systems supported by the kernel:')
 

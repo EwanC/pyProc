@@ -120,7 +120,7 @@ class ProcCpuInfo(ProcBase):
         '''
         self.cpus = []
         self.stats = []
-        super(ProcCpuInfo, self).__init__('/proc/cpuinfo')
+        super().__init__('/proc/cpuinfo')
         self.read()
 
     def read(self):
@@ -141,7 +141,7 @@ class ProcCpuInfo(ProcBase):
 
     def dump(self):
         '''Print information gathered to stdout.'''
-        super(ProcCpuInfo, self).dump()  # Print file header
+        super().dump()  # Print file header
 
         are_identical = all(cpu == self.cpus[0] for cpu in self.cpus[1:])
 

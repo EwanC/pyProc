@@ -11,7 +11,7 @@ class ProcCrypto(ProcBase):
         Read file by calling base class constructor
         then parse the contents.
         '''
-        super(ProcCrypto, self).__init__('/proc/crypto')
+        super().__init__('/proc/crypto')
         self.ciphers = []
         self.read()
 
@@ -27,7 +27,7 @@ class ProcCrypto(ProcBase):
 
     def dump(self):
         '''Print information gathered to stdout.'''
-        super(ProcCrypto, self).dump()  # Print file header
+        super().dump()  # Print file header
 
         print('Ciphers used by the kernel:\n')
         for cipher in self.ciphers:

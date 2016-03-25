@@ -59,7 +59,7 @@ class ProcMemInfo(ProcBase):
                       'DirectMap4k': None,
                       'DirectMap2M': None}
 
-        super(ProcMemInfo, self).__init__('/proc/meminfo')
+        super().__init__('/proc/meminfo')
         self.read()
 
     def read(self):
@@ -91,7 +91,7 @@ class ProcMemInfo(ProcBase):
     def dump(self):
         '''Print information gathered to stdout.'''
 
-        super(ProcMemInfo, self).dump()  # Print file header
+        super().dump()  # Print file header
 
         # TODO - it would be nice to sort this output
         for attribute in self.stats:

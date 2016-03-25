@@ -12,7 +12,7 @@ class ProcSwaps(ProcBase):
         then parse the contents.
         '''
         self.swap_files = []
-        super(ProcSwaps, self).__init__('/proc/swaps')
+        super().__init__('/proc/swaps')
         self.read()
 
     def read(self):
@@ -29,7 +29,7 @@ class ProcSwaps(ProcBase):
 
     def dump(self):
         '''Print information gathered to stdout.'''
-        super(ProcSwaps, self).dump()  # Print file header
+        super().dump()  # Print file header
 
         print('* When multiple swap files are available the lower the priority'
               ', the more likely the swap file will be used.\n')

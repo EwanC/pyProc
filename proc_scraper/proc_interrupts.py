@@ -42,7 +42,7 @@ class ProcInterrupts(ProcBase):
         '''
         self.cpu_irqs = []
         self.num_cpus = 0
-        super(ProcInterrupts, self).__init__('/proc/interrupts')
+        super().__init__('/proc/interrupts')
         self.read()
 
     def read(self):
@@ -77,7 +77,7 @@ class ProcInterrupts(ProcBase):
 
     def dump(self):
         '''Print information gathered to stdout.'''
-        super(ProcInterrupts, self).dump()  # Print file header
+        super().dump()  # Print file header
 
         for cpu in self.cpu_irqs:
             cpu.dump()
