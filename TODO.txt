@@ -1,6 +1,4 @@
 /proc/modules - see lsmod
-/proc/partitions
-
 
 cli flag with pid to print /proc/[pid]/*
 cli flag just for proc/sys

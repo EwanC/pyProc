@@ -10,6 +10,7 @@ from .proc_crypto import ProcCrypto
 from .proc_filesystems import ProcFileSystems
 from .proc_interrupts import ProcInterrupts
 from .proc_meminfo import ProcMemInfo
+from .proc_partitions import ProcPartitions
 
 
 class ProcDirectory:
@@ -36,7 +37,8 @@ class ProcDirectory:
                               ProcMemInfo(),
                               ProcFileSystems(),
                               ProcCrypto(),
-                              ProcInterrupts()]
+                              ProcInterrupts(),
+                              ProcPartitions()]
 
     def dump_all(self):
         '''
