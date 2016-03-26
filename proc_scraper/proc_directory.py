@@ -16,6 +16,7 @@ from .proc_modules import ProcModules
 from .proc_vsyscall import ProcVSyscall
 from .proc_filenr import ProcFileNR
 from .proc_inodenr import ProcInodeNR
+from .proc_dumpable import ProcDumpable
 
 
 class ProcDirectory:
@@ -48,7 +49,8 @@ class ProcDirectory:
 
         self.sys_wrappers = [ProcVSyscall(),
                              ProcFileNR(),
-                             ProcInodeNR()]
+                             ProcInodeNR(),
+                             ProcDumpable()]
 
     def dump_base(self):
         '''
