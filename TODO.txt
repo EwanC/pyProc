@@ -9,9 +9,6 @@
 /proc/[pid]/stack
 /proc/[pid]/status
 
-/proc/sys/kernel/pid_max
-/proc/sys/kernel/threads-max
-
 /proc/net/arp
 /proc/net/dev
 /proc/net/protocols

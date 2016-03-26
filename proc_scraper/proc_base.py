@@ -23,12 +23,16 @@ class ProcBase:
         '''
 
         self.file_path = file_path
-        self.handle = open(self.file_path, 'r')
-        self.content = self.handle.read()
+        try:
+            self.handle = open(self.file_path, 'r')
+            self.content = self.handle.read()
+        except FileNotFoundError:
+            self.content = []
 
     def __exit__(self):
         '''Close file handle when instance is destroyed'''
-        self.handle.close()
+        if self.handle:
+            self.handle.close()
 
     def dump(self):
         '''Print header identifying file parsed'''
