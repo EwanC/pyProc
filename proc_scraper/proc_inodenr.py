@@ -21,8 +21,11 @@ class ProcInodeNR(ProcBase):
         tokens = self.content.split()
         if tokens[0]:
             self.allocated_inodes = int(tokens[0])
-        if tokens[1]:
-            self.free_inodes = int(tokens[1])
+        try:
+            if tokens[1]:
+                self.free_inodes = int(tokens[1])
+        except:
+            pass
 
     def dump(self):
         '''Print information gathered to stdout.'''
