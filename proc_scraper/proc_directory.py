@@ -13,6 +13,10 @@ from .proc_meminfo import ProcMemInfo
 from .proc_partitions import ProcPartitions
 from .proc_modules import ProcModules
 
+from .proc_vsyscall import ProcVSyscall
+from .proc_filenr import ProcFileNR
+from .proc_inodenr import ProcInodeNR
+
 
 class ProcDirectory:
     '''
@@ -42,6 +46,10 @@ class ProcDirectory:
                               ProcPartitions(),
                               ProcModules()]
 
+        self.sys_wrappers = [ProcVSyscall(),
+                             ProcFileNR(),
+                             ProcInodeNR()]
+
     def dump_base(self):
         '''
         Iterates over all files and prints their details to
@@ -59,8 +67,8 @@ class ProcDirectory:
         print('net')
 
     def dump_sys(self):
-        # TODO
-        print('sys')
+        for _file in self.sys_wrappers:
+            _file.dump()  # Implemented in base class
 
     def dump_devices(self):
         # TODO

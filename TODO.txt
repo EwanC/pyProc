@@ -9,9 +9,6 @@
 /proc/[pid]/stack
 /proc/[pid]/status
 
-/proc/sys/abi/vsyscall32
-/proc/sys/fs/file-nr
-/proc/sys/fs/inode-nr
 /proc/sys/fs/suid-dumpable
 /proc/sys/kernel/pid_max
 /proc/sys/kernel/threads-max
