@@ -1,4 +1,23 @@
-/proc/[pid]/*
-proc/sys
-proc/net
+/proc/[pid]/auxv
+/proc/[pid]/cmdline
+/proc/[pid]/environ
+/proc/[pid]/fdinfo
+/proc/[pid]/io
+/proc/[pid]/maps
+/proc/[pid]/mounts
+/proc/[pid]/oom_score
+/proc/[pid]/stack
+/proc/[pid]/status
+
+/proc/sys/abi/vsyscall32
+/proc/sys/fs/file-nr
+/proc/sys/fs/inode-nr
+/proc/sys/fs/suid-dumpable
+/proc/sys/kernel/pid_max
+/proc/sys/kernel/threads-max
+
+/proc/net/arp
+/proc/net/dev
+/proc/net/protocols
+
 proc/bus/pci/devices, see lspci
