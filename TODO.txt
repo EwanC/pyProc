@@ -13,4 +13,4 @@
 /proc/net/dev
 /proc/net/protocols
 
-proc/bus/pci/devices, see lspci
+/proc/bus/pci/devices, see lspci

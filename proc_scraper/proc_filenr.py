@@ -24,8 +24,12 @@ class ProcFileNR(ProcBase):
             self.allocated_file_handles = int(tokens[0])
         if tokens[1]:
             self.free_file_handles = int(tokens[1])
-        if tokens[2]:
-            self.max_file_handles = int(tokens[2])
+
+        try:
+            if tokens[2]:
+                self.max_file_handles = int(tokens[2])
+        except IndexError:
+            pass
 
     def dump(self):
         '''Print information gathered to stdout.'''
