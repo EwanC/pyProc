@@ -17,6 +17,8 @@ from .proc_vsyscall import ProcVSyscall
 from .proc_filenr import ProcFileNR
 from .proc_inodenr import ProcInodeNR
 from .proc_dumpable import ProcDumpable
+from .proc_pidmax import ProcPidMax
+from .proc_threadmax import ProcThreadMax
 
 
 class ProcDirectory:
@@ -50,7 +52,9 @@ class ProcDirectory:
         self.sys_wrappers = [ProcVSyscall(),
                              ProcFileNR(),
                              ProcInodeNR(),
-                             ProcDumpable()]
+                             ProcDumpable(),
+                             ProcPidMax(),
+                             ProcThreadMax()]
 
     def dump_base(self):
         '''
