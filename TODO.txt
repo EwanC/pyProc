@@ -1,6 +1,4 @@
-/proc/modules - see lsmod
-
-cli flag with pid to print /proc/[pid]/*
-cli flag just for proc/sys
-cli flag just for proc/net
-cli flag just for proc/bus/pci/devices, see lspci
+/proc/[pid]/*
+proc/sys
+proc/net
+proc/bus/pci/devices, see lspci

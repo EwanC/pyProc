@@ -11,6 +11,7 @@ from .proc_filesystems import ProcFileSystems
 from .proc_interrupts import ProcInterrupts
 from .proc_meminfo import ProcMemInfo
 from .proc_partitions import ProcPartitions
+from .proc_modules import ProcModules
 
 
 class ProcDirectory:
@@ -38,7 +39,8 @@ class ProcDirectory:
                               ProcFileSystems(),
                               ProcCrypto(),
                               ProcInterrupts(),
-                              ProcPartitions()]
+                              ProcPartitions(),
+                              ProcModules()]
 
     def dump_base(self):
         '''
