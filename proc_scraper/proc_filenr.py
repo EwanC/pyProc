@@ -22,8 +22,12 @@ class ProcFileNR(ProcBase):
         tokens = self.content.split()
         if tokens[0]:
             self.allocated_file_handles = int(tokens[0])
-        if tokens[1]:
-            self.free_file_handles = int(tokens[1])
+
+        try:
+            if tokens[1]:
+                self.free_file_handles = int(tokens[1])
+        except IndexError:
+            return
 
         try:
             if tokens[2]:
