@@ -16,9 +16,12 @@ class ProcFdInfo(ProcBase):
         then parse the contents.
         '''
         directory = '/proc/{0}/fdinfo'.format(pid)
-        self.file_path = directory
-        files = listdir(directory)
         self.open_fds = []
+        self.file_path = directory
+        try:
+            files = listdir(directory)
+        except FileNotFoundError:
+            return
 
         for f in files:
             try:
