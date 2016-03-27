@@ -3,5 +3,4 @@
 * Check for tabs instead of spaces
 * Check for " instead of '
 * Remove any TODOs
-* Support /proc/self
 * Comment

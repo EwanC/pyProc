@@ -21,7 +21,11 @@ class ProcFdInfo(ProcBase):
         self.open_fds = []
 
         for f in files:
-            handle = open(directory+'/'+f, 'r')
+            try:
+                handle = open(directory + '/' + f, 'r')
+            except FileNotFoundError:
+                continue
+
             content = handle.read()
             position = 0
             flags = 0

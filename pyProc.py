@@ -16,7 +16,8 @@ if __name__ == '__main__':
     # Parse CLI arguments
     parser = argparse.ArgumentParser(prog='pyProc')
     parser.add_argument('-p', '--pid', type=int,
-                        help='process id to display information for')
+                        help='Display details for /proc/[pid]. '
+                              'Use pid 0 for /proc/self.')
 
     parser.add_argument('-n', '--net', action='store_true',
                         help='Display information from /proc/net')
@@ -27,7 +28,9 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     proc_dir = ProcDirectory()
-    if args.pid:
+    if args.pid == 0:
+        proc_dir.dump_proc('self')
+    elif args.pid:
         proc_dir.dump_proc(args.pid)
     if args.net:
         proc_dir.dump_net()
