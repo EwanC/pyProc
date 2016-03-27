@@ -24,8 +24,6 @@ if __name__ == '__main__':
     parser.add_argument('-s', '--sys', action='store_true',
                         help='Display information from /proc/sys')
 
-    parser.add_argument('-d', '--devices', action='store_true',
-                        help='Display details about /proc/bus/pci/devices')
     args = parser.parse_args()
 
     proc_dir = ProcDirectory()
@@ -35,8 +33,6 @@ if __name__ == '__main__':
         proc_dir.dump_net()
     if args.sys:
         proc_dir.dump_sys()
-    if args.devices:
-        proc_dir.dump_devices()
 
     # Print details from root /proc dir
     if len(sys.argv) == 1:

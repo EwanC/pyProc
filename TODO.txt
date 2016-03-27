@@ -3,5 +3,3 @@
 /proc/[pid]/io
 /proc/[pid]/maps
 /proc/[pid]/mounts
-
-/proc/bus/pci/devices, see lspci

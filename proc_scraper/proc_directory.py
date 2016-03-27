@@ -95,7 +95,3 @@ class ProcDirectory:
     def dump_sys(self):
         for _file in self.sys_wrappers:
             _file.dump()  # Implemented in base class
-
-    def dump_devices(self):
-        # TODO
-        print('devices')
