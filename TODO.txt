@@ -3,6 +3,5 @@
 /proc/[pid]/io
 /proc/[pid]/maps
 /proc/[pid]/mounts
-/proc/[pid]/oom_score
 
 /proc/bus/pci/devices, see lspci
