@@ -20,6 +20,10 @@ from .proc_dumpable import ProcDumpable
 from .proc_pidmax import ProcPidMax
 from .proc_threadmax import ProcThreadMax
 
+from .proc_arp import ProcARP
+from .proc_net_dev import ProcNetDev
+from .proc_protocols import ProcProtocols
+
 
 class ProcDirectory:
     '''
@@ -56,6 +60,10 @@ class ProcDirectory:
                              ProcPidMax(),
                              ProcThreadMax()]
 
+        self.net_wrappers = [ProcARP(),
+                             ProcNetDev(),
+                             ProcProtocols()]
+
     def dump_base(self):
         '''
         Iterates over all files and prints their details to
@@ -69,8 +77,8 @@ class ProcDirectory:
         print('proc', pid)
 
     def dump_net(self):
-        # TODO
-        print('net')
+        for _file in self.net_wrappers:
+            _file.dump()  # Implemented in base class
 
     def dump_sys(self):
         for _file in self.sys_wrappers:

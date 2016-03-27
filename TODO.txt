@@ -9,8 +9,4 @@
 /proc/[pid]/stack
 /proc/[pid]/status
 
-/proc/net/arp
-/proc/net/dev
-/proc/net/protocols
-
 /proc/bus/pci/devices, see lspci
