@@ -36,7 +36,7 @@ class ProcBuddyInfo(ProcBase):
     def get_fragment_magnitudes(self, chunks):
         '''
         Finds the sizes of each of the memory fragment
-        chunks using the PAGE_SIZE * 2^n for
+        chunks using PAGE_SIZE * 2^n for
         1...number of chunks
 
         Returns a list of all the chunk sizes in bytes.

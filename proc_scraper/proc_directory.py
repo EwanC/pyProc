@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+# Imports for parsing files in /proc root directory
 from .proc_stat import ProcStat
 from .proc_swaps import ProcSwaps
 from .proc_uptime import ProcUptime
@@ -13,6 +14,7 @@ from .proc_meminfo import ProcMemInfo
 from .proc_partitions import ProcPartitions
 from .proc_modules import ProcModules
 
+# Imports for parsing files in proc/sys directory
 from .proc_vsyscall import ProcVSyscall
 from .proc_filenr import ProcFileNR
 from .proc_inodenr import ProcInodeNR
@@ -20,10 +22,12 @@ from .proc_dumpable import ProcDumpable
 from .proc_pidmax import ProcPidMax
 from .proc_threadmax import ProcThreadMax
 
+# Imports for parsing files in proc/net directory
 from .proc_arp import ProcARP
 from .proc_net_dev import ProcNetDev
 from .proc_protocols import ProcProtocols
 
+# Imports for parsing files in proc/[pid] directory
 from .proc_cmdline import ProcCmdline
 from .proc_environ import ProcEnviron
 from .proc_stack import ProcStack
@@ -44,45 +48,36 @@ class ProcDirectory:
     them to stdout.
     '''
 
-    def __init__(self):
-        '''
-        Creates an instance of all the classes derived
-        from ProcBase. Representing abstractions of
-        the supported sub-files.
-        '''
-        self.base_wrappers = [ProcStat(),
-                              ProcSwaps(),
-                              ProcUptime(),
-                              ProcVersion(),
-                              ProcBuddyInfo(),
-                              ProcCpuInfo(),
-                              ProcMemInfo(),
-                              ProcFileSystems(),
-                              ProcCrypto(),
-                              ProcInterrupts(),
-                              ProcPartitions(),
-                              ProcModules()]
-
-        self.sys_wrappers = [ProcVSyscall(),
-                             ProcFileNR(),
-                             ProcInodeNR(),
-                             ProcDumpable(),
-                             ProcPidMax(),
-                             ProcThreadMax()]
-
-        self.net_wrappers = [ProcARP(),
-                             ProcNetDev(),
-                             ProcProtocols()]
-
     def dump_base(self):
         '''
-        Iterates over all files and prints their details to
+        Creates instances of all the file abstractions from the root /proc
+        directory, inheriting from procBase.
+        Then iterates over all files and prints their details to
         stdout using overridden procBase dump() function.
         '''
-        for _file in self.base_wrappers:
-            _file.dump()  # Implemented in base class
+        base_wrappers = [ProcStat(),
+                         ProcSwaps(),
+                         ProcUptime(),
+                         ProcVersion(),
+                         ProcBuddyInfo(),
+                         ProcCpuInfo(),
+                         ProcMemInfo(),
+                         ProcFileSystems(),
+                         ProcCrypto(),
+                         ProcInterrupts(),
+                         ProcPartitions(),
+                         ProcModules()]
+
+        for _file in base_wrappers:
+            _file.dump()  # Always implemented in base class
 
     def dump_proc(self, pid):
+        '''
+        Creates instances of all the file abstractions from the /proc/[pid]
+        directory, inheriting from procBase.
+        Then iterates over all files and prints their details to
+        stdout using overridden procBase dump() function.
+        '''
         pid_wrappers = [ProcCmdline(pid),
                         ProcEnviron(pid),
                         ProcStack(pid),
@@ -94,12 +89,35 @@ class ProcDirectory:
                         ProcFdInfo(pid)]
 
         for _file in pid_wrappers:
-            _file.dump()  # Implemented in base class
+            _file.dump()  # Always implemented in base class
 
     def dump_net(self):
-        for _file in self.net_wrappers:
-            _file.dump()  # Implemented in base class
+        '''
+        Creates instances of all the file abstractions from the /proc/net
+        directory, inheriting from procBase.
+        Then iterates over all files and prints their details to
+        stdout using overridden procBase dump() function.
+        '''
+        net_wrappers = [ProcARP(),
+                        ProcNetDev(),
+                        ProcProtocols()]
+
+        for _file in net_wrappers:
+            _file.dump()  # Always implemented in base class
 
     def dump_sys(self):
-        for _file in self.sys_wrappers:
-            _file.dump()  # Implemented in base class
+        '''
+        Creates instances of all the file abstractions from the /proc/sys
+        directory, inheriting from procBase.
+        Then iterates over all files and prints their details to
+        stdout using overridden procBase dump() function.
+        '''
+        sys_wrappers = [ProcVSyscall(),
+                        ProcFileNR(),
+                        ProcInodeNR(),
+                        ProcDumpable(),
+                        ProcPidMax(),
+                        ProcThreadMax()]
+
+        for _file in sys_wrappers:
+            _file.dump()  # Always implemented in base class

@@ -9,7 +9,9 @@ class ProcARP(ProcBase):
     def __init__(self):
         '''
         Read file by calling base class constructor
-        then parse the contents.
+        which reads the contents. This file is already
+        printable ASCII, so we can print it without
+        any further parsing.
         '''
         super().__init__('/proc/net/arp')
 

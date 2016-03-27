@@ -9,7 +9,9 @@ class ProcCmdline(ProcBase):
     def __init__(self, pid):
         '''
         Read file by calling base class constructor
-        then parse the contents.
+        which loads the contents into self.content.
+        This file is already ASCII printable, so no
+        further parsing is required.
         '''
         super().__init__('/proc/{0}/cmdline'.format(pid))
 

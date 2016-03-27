@@ -22,6 +22,7 @@ class ProcCrypto(ProcBase):
             if not tokens:
                 continue
 
+            # Limit number of algorithms displayed
             if tokens[0] == 'name' and not tokens[-1].startswith('__'):
                 self.ciphers.append(tokens[-1])
 

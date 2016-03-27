@@ -26,8 +26,9 @@ class ProcBase:
         try:
             self.handle = open(self.file_path, 'r')
             self.content = self.handle.read()
-        except (FileNotFoundError, PermissionError):
+        except (FileNotFoundError, PermissionError) as e:
             self.content = []
+            self.error = e
 
     def __exit__(self):
         '''Close file handle when instance is destroyed'''
