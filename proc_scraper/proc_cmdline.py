@@ -17,4 +17,5 @@ class ProcCmdline(ProcBase):
         '''Print information gathered to stdout.'''
         super().dump()  # Print file header
 
-        print('Process command line:', self.content)
+        if self.content:
+            print('Process command line:', self.content)
