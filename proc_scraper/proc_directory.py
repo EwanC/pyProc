@@ -31,6 +31,7 @@ from .proc_status import ProcStatus
 from .proc_oom_score import ProcOomScore
 from .proc_maps import ProcMaps
 from .proc_io import ProcIO
+from .proc_mounts import ProcMounts
 
 
 class ProcDirectory:
@@ -87,7 +88,8 @@ class ProcDirectory:
                         ProcStatus(pid),
                         ProcOomScore(pid),
                         ProcMaps(pid),
-                        ProcIO(pid)]
+                        ProcIO(pid),
+                        ProcMounts(pid)]
 
         for _file in pid_wrappers:
             _file.dump()  # Implemented in base class

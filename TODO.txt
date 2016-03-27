@@ -1,6 +1,5 @@
 /proc/[pid]/auxv
 /proc/[pid]/fdinfo
-/proc/[pid]/mounts
 
 * Error handling when can't open file
 * Check docstrings
