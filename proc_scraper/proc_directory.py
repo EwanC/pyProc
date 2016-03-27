@@ -24,6 +24,9 @@ from .proc_arp import ProcARP
 from .proc_net_dev import ProcNetDev
 from .proc_protocols import ProcProtocols
 
+from .proc_cmdline import ProcCmdline
+from .proc_environ import ProcEnviron
+
 
 class ProcDirectory:
     '''
@@ -73,8 +76,11 @@ class ProcDirectory:
             _file.dump()  # Implemented in base class
 
     def dump_proc(self, pid):
-        # TODO
-        print('proc', pid)
+        pid_wrappers = [ProcCmdline(pid),
+                        ProcEnviron(pid)]
+
+        for _file in pid_wrappers:
+            _file.dump()  # Implemented in base class
 
     def dump_net(self):
         for _file in self.net_wrappers:

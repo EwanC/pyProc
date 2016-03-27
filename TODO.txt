@@ -1,6 +1,4 @@
 /proc/[pid]/auxv
-/proc/[pid]/cmdline
-/proc/[pid]/environ
 /proc/[pid]/fdinfo
 /proc/[pid]/io
 /proc/[pid]/maps
