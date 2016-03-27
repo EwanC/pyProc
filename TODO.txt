@@ -1,5 +1,4 @@
 /proc/[pid]/auxv
 /proc/[pid]/fdinfo
 /proc/[pid]/io
-/proc/[pid]/maps
 /proc/[pid]/mounts
