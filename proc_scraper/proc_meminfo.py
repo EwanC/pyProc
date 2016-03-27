@@ -93,9 +93,8 @@ class ProcMemInfo(ProcBase):
 
         super().dump()  # Print file header
 
-        # TODO - it would be nice to sort this output
-        for attribute in self.stats:
-            value = self.stats[attribute]
+        sorted_dict = sorted(self.stats.items(), key=lambda x: x[0])
+        for (attribute, value) in sorted_dict:
             if value == 0 or value is None:
                 continue
 
