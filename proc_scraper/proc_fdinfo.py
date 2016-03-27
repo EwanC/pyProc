@@ -28,10 +28,10 @@ class ProcFdInfo(ProcBase):
         for f in files:
             try:
                 handle = open(directory + '/' + f, 'r')
+                content = handle.read()
             except FileNotFoundError:
                 continue
 
-            content = handle.read()
             position = 0
             flags = 0
             for line in content.split('\n'):

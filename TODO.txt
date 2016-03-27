@@ -1,4 +1,0 @@
-* Error handling when can't open file
-* Check docstrings
-* Check for tabs instead of spaces
-* Comment
