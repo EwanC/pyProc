@@ -17,6 +17,9 @@ class ProcEnviron(ProcBase):
 
     def read(self):
         '''Parses contents of /proc/[pid]/environ'''
+        if not self.content:
+            return
+
         envs = self.content.split('\0')
         for env in envs:
             self.envs.append(env)

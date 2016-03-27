@@ -26,6 +26,7 @@ from .proc_protocols import ProcProtocols
 
 from .proc_cmdline import ProcCmdline
 from .proc_environ import ProcEnviron
+from .proc_stack import ProcStack
 
 
 class ProcDirectory:
@@ -77,7 +78,8 @@ class ProcDirectory:
 
     def dump_proc(self, pid):
         pid_wrappers = [ProcCmdline(pid),
-                        ProcEnviron(pid)]
+                        ProcEnviron(pid),
+                        ProcStack(pid)]
 
         for _file in pid_wrappers:
             _file.dump()  # Implemented in base class

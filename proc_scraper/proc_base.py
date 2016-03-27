@@ -26,7 +26,7 @@ class ProcBase:
         try:
             self.handle = open(self.file_path, 'r')
             self.content = self.handle.read()
-        except FileNotFoundError:
+        except (FileNotFoundError, PermissionError):
             self.content = []
 
     def __exit__(self):
