@@ -2,3 +2,11 @@
 /proc/[pid]/fdinfo
 /proc/[pid]/io
 /proc/[pid]/mounts
+
+* Error handling when can't open file
+* Check docstrings
+* Check for tabs instead of spaces
+* Check for " instead of '
+* Remove any TODOs
+* Support /proc/self
+* Comment
