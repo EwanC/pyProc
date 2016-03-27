@@ -4,7 +4,7 @@ from .proc_base import ProcBase
 
 
 class ProcMounts(ProcBase):
-    '''Object represents the /proc/interrupts file.'''
+    '''Object represents the /proc/mounts file.'''
 
     format_str = '{0:15} | {1:25} | {2:15} | {3}'
 

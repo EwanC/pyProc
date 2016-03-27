@@ -20,6 +20,7 @@ class ProcEnviron(ProcBase):
         if not self.content:
             return
 
+        # Environmental variable list is null delimited
         envs = self.content.split('\0')
         for env in envs:
             self.envs.append(env)

@@ -17,8 +17,6 @@ class ProcSwaps(ProcBase):
 
     def read(self):
         '''Parses contents of /proc/swaps'''
-        # Iterate over each line of the file
-
         for line in self.content.split('\n')[1:]:
             tokens = line.split()
 

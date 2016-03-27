@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-from os import listdir
-
 from .proc_base import ProcBase
+
+from os import listdir
 
 
 class ProcFdInfo(ProcBase):
@@ -18,6 +18,8 @@ class ProcFdInfo(ProcBase):
         directory = '/proc/{0}/fdinfo'.format(pid)
         self.open_fds = []
         self.file_path = directory
+
+        # Check pid exists
         try:
             files = listdir(directory)
         except FileNotFoundError:
@@ -40,6 +42,7 @@ class ProcFdInfo(ProcBase):
                 if tokens[0] == 'pos:':
                     position = int(tokens[-1])
                 if tokens[0] == 'flags:':
+                    # Flags are base 8
                     flags = int(tokens[-1], 8)
 
             self.open_fds.append((f, position, flags))
@@ -55,8 +58,7 @@ class ProcFdInfo(ProcBase):
 
         for (fd, position, flags) in self.open_fds:
 
-            # Only check first 2 byes
-            flag_strs = []
+            flag_strs = []  # C flag strings
 
             if (flags & 0x00FF) | 0x0000 == 0x0000:
                 flag_strs.append('O_RDONLY')

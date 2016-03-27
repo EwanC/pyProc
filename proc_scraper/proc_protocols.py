@@ -9,11 +9,15 @@ class ProcProtocols(ProcBase):
     def __init__(self):
         '''
         Read file by calling base class constructor
-        then parse the contents.
+        which populates self.content. Since this
+        file is already printable no further parsing
+        is required.
         '''
         super().__init__('/proc/net/protocols')
 
     def dump(self):
         '''Print information gathered to stdout.'''
         super().dump()  # Print file header
-        print(self.content)
+
+        if self.content:
+            print(self.content)

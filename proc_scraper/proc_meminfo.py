@@ -2,7 +2,6 @@
 
 from .proc_base import ProcBase
 
-
 from math import ceil
 
 
@@ -93,9 +92,10 @@ class ProcMemInfo(ProcBase):
 
         super().dump()  # Print file header
 
+        # Sort by key
         sorted_dict = sorted(self.stats.items(), key=lambda x: x[0])
         for (attribute, value) in sorted_dict:
-            if value == 0 or value is None:
+            if value is None or value == 0:
                 continue
 
             suffix = "bytes"

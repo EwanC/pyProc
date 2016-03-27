@@ -16,7 +16,7 @@ class ProcOomScore(ProcBase):
         self.read()
 
     def read(self):
-        '''Parses contents of /proc/sys/fs/file-nr'''
+        '''Parses contents of /proc/[pid]/oom_score'''
         if self.content:
             self.oom_score = int(self.content)
 

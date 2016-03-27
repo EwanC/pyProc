@@ -4,7 +4,7 @@ from .proc_base import ProcBase
 
 
 class ProcFileSystems(ProcBase):
-    '''Object represents the /proc/filesystem file.'''
+    '''Object represents the /proc/filesystems file.'''
 
     def __init__(self):
         '''
